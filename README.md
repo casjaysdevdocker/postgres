@@ -19,17 +19,17 @@ dockermgr update postgres
 ## Install and run container
   
 ```shell
-mkdir -p "$HOME/.local/share/srv/docker/postgres/rootfs"
+mkdir -p "$HOME/.local/share/srv/docker/postgres/volumes"
 git clone "https://github.com/dockermgr/postgres" "$HOME/.local/share/CasjaysDev/dockermgr/postgres"
-cp -Rfva "$HOME/.local/share/CasjaysDev/dockermgr/postgres/rootfs/." "$HOME/.local/share/srv/docker/postgres/rootfs/"
+cp -Rfva "$HOME/.local/share/CasjaysDev/dockermgr/postgres/rootfs/." "$HOME/.local/share/srv/docker/postgres/volumes/"
 docker run -d \
 --restart always \
 --privileged \
 --name casjaysdevdocker-postgres \
 --hostname postgres \
 -e TZ=${TIMEZONE:-America/New_York} \
--v "$HOME/.local/share/srv/docker/casjaysdevdocker-postgres/rootfs/data:/data:z" \
--v "$HOME/.local/share/srv/docker/casjaysdevdocker-postgres/rootfs/config:/config:z" \
+-v "$HOME/.local/share/srv/docker/casjaysdevdocker-postgres/volumes/data:/data:z" \
+-v "$HOME/.local/share/srv/docker/casjaysdevdocker-postgres/volumes/config:/config:z" \
 -p 80:80 \
 casjaysdevdocker/postgres:latest
 ```
@@ -46,8 +46,8 @@ services:
       - TZ=America/New_York
       - HOSTNAME=postgres
     volumes:
-      - "$HOME/.local/share/srv/docker/casjaysdevdocker-postgres/rootfs/data:/data:z"
-      - "$HOME/.local/share/srv/docker/casjaysdevdocker-postgres/rootfs/config:/config:z"
+      - "$HOME/.local/share/srv/docker/casjaysdevdocker-postgres/volumes/data:/data:z"
+      - "$HOME/.local/share/srv/docker/casjaysdevdocker-postgres/volumes/config:/config:z"
     ports:
       - 80:80
     restart: always
