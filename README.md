@@ -19,8 +19,8 @@ dockermgr update postgres
 ## Install and run container
   
 ```shell
-dockerHome="/var/lib/srv/$USER/docker/casjaysdevdocker/postgres/postgres/latest/rootfs"
-mkdir -p "/var/lib/srv/$USER/docker/postgres/rootfs"
+dockerHome="/srv/$USER/docker/casjaysdevdocker/postgres/postgres/latest/rootfs"
+mkdir -p "/srv/$USER/docker/postgres/rootfs"
 git clone "https://github.com/dockermgr/postgres" "$HOME/.local/share/CasjaysDev/dockermgr/postgres"
 cp -Rfva "$HOME/.local/share/CasjaysDev/dockermgr/postgres/rootfs/." "$dockerHome/"
 docker run -d \
@@ -47,8 +47,8 @@ services:
       - TZ=America/New_York
       - HOSTNAME=postgres
     volumes:
-      - "/var/lib/srv/$USER/docker/casjaysdevdocker/postgres/postgres/latest/rootfs/data:/data:z"
-      - "/var/lib/srv/$USER/docker/casjaysdevdocker/postgres/postgres/latest/rootfs/config:/config:z"
+      - "/srv/$USER/docker/casjaysdevdocker/postgres/postgres/latest/rootfs/data:/data:z"
+      - "/srv/$USER/docker/casjaysdevdocker/postgres/postgres/latest/rootfs/config:/config:z"
     ports:
       - 80:80
     restart: always
